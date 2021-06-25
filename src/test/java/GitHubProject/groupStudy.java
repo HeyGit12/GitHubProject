@@ -34,7 +34,7 @@ public class groupStudy {
     }
 
     @Test //Ferhat
-    public void LoginFunctionality() throws InterruptedException {
+    public void testCase1() throws InterruptedException {
         driver.get("http://automationpractice.com/index.php");
         Actions action=new Actions(driver);
 
