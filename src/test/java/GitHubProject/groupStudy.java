@@ -20,7 +20,7 @@ public class groupStudy {
         driver = WebDriverFactory.getDriver("chrome");
         driver.manage().window().maximize();
     }
-    //@AfterMethod
+    @AfterMethod
     public void tearDown(){
         driver.quit();
     }
