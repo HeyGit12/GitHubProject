@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -61,6 +62,25 @@ public class groupStudy {
 
     }
 
+    @Test //Bugra TC10
+    public void testCase10() throws InterruptedException {
+        driver.get("http://automationpractice.com/index.php");
+        Actions action=new Actions(driver);
+
+        WebElement womanTab=driver.findElement(By.xpath("//a[@title='Women']"));
+        action.moveToElement(womanTab).build().perform();
+        driver.findElement(By.xpath("//*[@id=\"block_top_menu\"]/ul/li[1]/ul/li[1]/ul/li[1]/a")).click();
+        Thread.sleep(2500);
+
+        WebElement product = driver.findElement(By.xpath("//img[@title='Faded Short Sleeve T-shirts']"));
+        action.moveToElement(product).build().perform();
+        driver.findElement(By.xpath("//div[@class='wishlist']")).click();
+        Thread.sleep(1500);
+
+        String expectedErrorMessage ="You must be logged in to manage your wishlist.";
+        String actualErrorMessage = driver.findElement(By.xpath("//p[@class='fancybox-error']")).getText();
+        Assert.assertEquals(actualErrorMessage,expectedErrorMessage,"Verify that error message is displayed");
+    }
 
 
 
