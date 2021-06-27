@@ -82,6 +82,54 @@ public class groupStudy {
         Assert.assertEquals(actualErrorMessage,expectedErrorMessage,"Verify that error message is displayed");
     }
 
+    @Test //Bugra TC11
+    public void testCase11() throws InterruptedException {
+        driver.get("http://automationpractice.com/index.php");
+        Actions action=new Actions(driver);
+
+        driver.findElement(By.xpath("//a[@class='login']")).click();
+        driver.findElement(By.id("email")).sendKeys("dogru.alimert@gmail.com");
+        driver.findElement(By.id("passwd")).sendKeys("200915");
+        driver.findElement(By.id("SubmitLogin")).click();
+
+        WebElement womanTab=driver.findElement(By.xpath("//a[@title='Women']"));
+        action.moveToElement(womanTab).build().perform();
+        driver.findElement(By.xpath("//*[@id=\"block_top_menu\"]/ul/li[1]/ul/li[1]/ul/li[1]/a")).click();
+        Thread.sleep(2500);
+
+        WebElement product = driver.findElement(By.xpath("//img[@title='Faded Short Sleeve T-shirts']"));
+        action.moveToElement(product).build().perform();
+        driver.findElement(By.xpath("//a[@title='View']")).click();
+
+        String actualQuantity = driver.findElement(By.id("quantity_wanted")).getAttribute("Value");
+        Assert.assertEquals(actualQuantity,"1","Verify that quantity is set to 1");
+
+        WebElement dropDownMenu = driver.findElement(By.id("group_1"));
+        Select sizeMenu = new Select(dropDownMenu);
+        sizeMenu.selectByValue("2");
+
+        driver.findElement(By.xpath("//button[@name='Submit']")).click();
+        Thread.sleep(2500);
+
+        driver.findElement(By.xpath("//a[@title='Proceed to checkout']")).click();
+        Thread.sleep(2500);
+
+        String actualTotalForOne = driver.findElement(By.id("total_price")).getText();
+
+        driver.findElement(By.xpath("//a[@title='Add']")).click();
+        Thread.sleep(2500);
+        String actualTotalForTwo = driver.findElement(By.id("total_price")).getText();
+
+        Assert.assertNotEquals(actualTotalForOne,actualTotalForTwo,"Verify that Total price is changing.");
+
+        String expectedTotalForTwo = "$35.02";
+
+        Assert.assertEquals(actualTotalForTwo,expectedTotalForTwo,"Verify that Total price reflecting correct price.");
+
+    }
+
+
+
 
 
 }
