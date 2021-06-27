@@ -20,7 +20,7 @@ public class groupStudy {
         driver = WebDriverFactory.getDriver("chrome");
         driver.manage().window().maximize();
     }
-    @AfterMethod
+    //@AfterMethod
     public void tearDown(){
         driver.quit();
     }
@@ -80,22 +80,22 @@ public class groupStudy {
         Thread.sleep(2000);
         Actions action=new Actions(driver);
 
-        WebElement womanTab=driver.findElement(By.linkText("Women"));
+        WebElement womanTab=driver.findElement(By.xpath("//a[.='Women']"));
         action.moveToElement(womanTab).build().perform();
         Thread.sleep(3000);
-        driver.findElement(By.xpath("(//li/a)[1]")).click();
+        driver.findElement(By.xpath("(//a[@title='T-shirts'])[1]")).click();
 
-        WebElement secondItem=driver.findElement(By.xpath("//img[@alt='Blouse']"));
-        action.moveToElement(secondItem).build().perform();
+        WebElement Item=driver.findElement(By.xpath("//img[@alt='Faded Short Sleeve T-shirts']"));
+        action.moveToElement(Item).build().perform();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("(//span[.='More'])[2]")).click();
+        driver.findElement(By.xpath("//span[.='More']")).click();
         Thread.sleep(2000);
         driver.findElement(By.xpath("(//span/i)[6]")).click();
 
         WebElement sizeDropdown=driver.findElement(By.id("group_1"));
         Select sizeDrop=new Select(sizeDropdown);
         sizeDrop.selectByValue("3");
-        driver.findElement(By.xpath("//a[@title='White']")).click();
+        driver.findElement(By.xpath("//a[@title='Orange']")).click();
         driver.findElement(By.xpath("//span[.='Add to cart']")).click();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//a[@title='Proceed to checkout']")).click();
