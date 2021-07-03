@@ -2,9 +2,7 @@ package GitHubProject;
 
 import Utility.WebDriverFactory;
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -85,7 +83,7 @@ public class groupStudy {
         Thread.sleep(3000);
         driver.findElement(By.xpath("(//a[@title='T-shirts'])[1]")).click();
 
-        WebElement Item=driver.findElement(By.xpath("//img[@alt='Faded Short Sleeve T-shirts']"));
+        WebElement Item=driver.findElement(By.xpath("//img[@title='Faded Short Sleeve T-shirts']"));
         action.moveToElement(Item).build().perform();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//span[.='More']")).click();
